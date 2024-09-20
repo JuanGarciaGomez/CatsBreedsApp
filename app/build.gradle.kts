@@ -81,4 +81,7 @@ dependencies {
     // Glide
     implementation(libs.glide)
     ksp(libs.compiler)
+
+    implementation (libs.logging.interceptor)
+
 }
