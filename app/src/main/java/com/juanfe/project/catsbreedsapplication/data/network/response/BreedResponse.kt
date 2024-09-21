@@ -8,5 +8,7 @@ data class BreedResponse(
     val origin: String,
     val temperament: String,
     @SerializedName("reference_image_id")
-    val imageId: String
+    val imageId: String,
+    @SerializedName("life_span")
+    val lifeSpan: String
 )

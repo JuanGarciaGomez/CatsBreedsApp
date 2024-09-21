@@ -4,4 +4,11 @@ import com.juanfe.project.catsbreedsapplication.data.network.response.BreedRespo
 import com.juanfe.project.catsbreedsapplication.domain.BreedModel
 
 fun BreedResponse.toDomain() =
-    BreedModel(id = id, name = name, origin = origin, temperament = temperament, imageId = imageId)
+    BreedModel(
+        id = id,
+        name = name,
+        origin = origin,
+        temperament = temperament,
+        imageId = imageId,
+        lifeSpan = lifeSpan
+    )
