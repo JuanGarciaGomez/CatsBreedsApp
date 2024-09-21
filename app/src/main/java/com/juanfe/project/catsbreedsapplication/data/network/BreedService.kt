@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface BreedService {
     @GET("breeds")
-    suspend fun getBodyPartList(
+    suspend fun getCatBreedList(
         @Query("limit") limit: Int = 10,
         @Query("page") page: Int = 0,
     ): Response<List<BreedResponse>>
