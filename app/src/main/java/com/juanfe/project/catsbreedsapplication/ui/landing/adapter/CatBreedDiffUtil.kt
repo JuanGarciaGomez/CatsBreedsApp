@@ -1,11 +1,10 @@
 package com.juanfe.project.catsbreedsapplication.ui.landing.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.juanfe.project.catsbreedsapplication.data.network.response.BreedResponse
 import com.juanfe.project.catsbreedsapplication.domain.BreedModel
 
 
-class AddOrderDiffUtil(private val oldList: List<BreedModel>, private val newList: List<BreedModel>) : DiffUtil.Callback() {
+class CatBreedDiffUtil(private val oldList: List<BreedModel>, private val newList: List<BreedModel>) : DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 
     override fun getNewListSize(): Int = newList.size

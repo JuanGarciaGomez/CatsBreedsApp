@@ -1,86 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cat_breed"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="8dp"
-    android:paddingVertical="8dp">
-
+    android:padding="16dp">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_cat_breed"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardElevation="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="130dp"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="4dp"
+        app:strokeColor="@android:color/transparent"
+        app:strokeWidth="0dp"
+        tools:ignore="RtlSymmetry">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="24dp"
+            android:paddingStart="36dp"
+            android:paddingEnd="16dp">
 
             <TextView
                 android:id="@+id/cat_breed_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Papas de pollo BBQ x 2" />
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="Tipo de raza"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/cat_breed_more"
+                android:id="@+id/cat_breed_life_span"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_margin="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Mas.." />
-
-            <ImageView
-                android:id="@+id/cat_breed_img"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                android:layout_margin="16dp"
-                android:contentDescription="no"
-                app:layout_constraintBottom_toTopOf="@id/cat_breed_country"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cat_breed_name"
-                tools:srcCompat="@drawable/arrow_back" />
-
-
-            <TextView
-                android:id="@+id/cat_breed_country"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="Papas de pollo BBQ x 2" />
+                android:layout_marginTop="8dp"
+                tools:text="Esperanza de vida"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/cat_breed_temperament"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_margin="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:text="Mas.." />
+                android:layout_marginTop="8dp"
+                tools:text="Atributo"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                android:textSize="14sp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/cat_breed_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawablePadding="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                app:drawableStartCompat="@drawable/location"
+                tools:text="Pais"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                android:textSize="14sp" />
 
+
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_breed_img"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="4dp"
+        app:strokeColor="@android:color/transparent"
+        app:strokeWidth="0dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/cat_breed_img"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:contentDescription="Cat Image"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@drawable/logo" />
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

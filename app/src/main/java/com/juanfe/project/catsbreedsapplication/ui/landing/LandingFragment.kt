@@ -58,7 +58,7 @@ class LandingFragment : Fragment() {
 
     private fun updateUi(viewState: LandingViewState) {
         when (viewState) {
-            LandingViewState.Error ->  LoadingDialog.dismiss()
+            LandingViewState.Error -> LoadingDialog.dismiss()
 
             LandingViewState.Loading -> {
                 LoadingDialog.create(requireContext())

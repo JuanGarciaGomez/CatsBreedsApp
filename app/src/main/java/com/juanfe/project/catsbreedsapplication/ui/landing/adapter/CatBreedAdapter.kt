@@ -5,11 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.juanfe.project.catsbreedsapplication.core.ex.loadCatBreadImg
-import com.juanfe.project.catsbreedsapplication.data.network.response.BreedResponse
 import com.juanfe.project.catsbreedsapplication.databinding.ItemCatBreedBinding
 import com.juanfe.project.catsbreedsapplication.domain.BreedModel
 
-//BreedResponse debe ser reemplazado por un modelo para la UI
 
 class CatBreedAdapter(
     private var list: List<BreedModel>,
@@ -18,7 +16,7 @@ class CatBreedAdapter(
 
 
     fun updateList(newList: List<BreedModel>) {
-        val allOrderDiff = AddOrderDiffUtil(list, newList)
+        val allOrderDiff = CatBreedDiffUtil(list, newList)
         val result = DiffUtil.calculateDiff(allOrderDiff)
         list = newList
         result.dispatchUpdatesTo(this)
@@ -53,10 +51,13 @@ class CatBreedAdapter(
         fun bind(item: BreedModel, onItemSelected: (BreedModel) -> Unit) {
             binding.apply {
                 catBreedName.text = item.name
-                catBreedMore.text = item.id
                 catBreedCountry.text = item.origin
+                catBreedLifeSpan.text = "${item.lifeSpan} lifespan"
                 catBreedImg.loadCatBreadImg(item.imageId)
                 catBreedTemperament.text = item.temperament.substringBefore(",")
+                cardBreedImg.setOnClickListener {
+                    onItemSelected.invoke(item)
+                }
             }
         }
 
