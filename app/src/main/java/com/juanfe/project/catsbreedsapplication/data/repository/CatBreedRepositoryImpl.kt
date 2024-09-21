@@ -17,4 +17,14 @@ class CatBreedRepositoryImpl @Inject constructor(private val breedService: Breed
             body.map { it.toDomain() }
         }
     }
+
+    override suspend fun searchBreed(query: String): Result<List<BreedModel>>  = runCatching {
+        val response = breedService.searchBreed(query)
+        val body = response.body()
+        if (body.isNullOrEmpty()) {
+            throw Exception("Null or empty")
+        } else {
+            body.map { it.toDomain() }
+        }
+    }
 }

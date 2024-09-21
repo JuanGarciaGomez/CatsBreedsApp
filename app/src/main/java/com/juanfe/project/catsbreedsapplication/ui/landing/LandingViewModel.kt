@@ -22,6 +22,20 @@ class LandingViewModel @Inject constructor(private val mainRepository: CatBreedR
         viewModelScope.launch(Dispatchers.IO) {
             mainRepository.getCatBreed().fold(onSuccess = { catBreedList ->
                 _viewState.value = LandingViewState.Success(catBreedList)
+                val state = _viewState.value
+                if (state is LandingViewState.Success){
+                    state.breedModels.plus(catBreedList)
+                }
+            }, onFailure = {
+                _viewState.value = LandingViewState.Error
+            })
+        }
+    }
+
+    fun searchBreeds(query: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            mainRepository.searchBreed(query).fold(onSuccess = { searchResult ->
+                _viewState.value = LandingViewState.Success(searchResult)
             }, onFailure = {
                 _viewState.value = LandingViewState.Error
             })

@@ -31,27 +31,27 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                tools:text="Tipo de raza"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:text="Tipo de raza" />
 
             <TextView
                 android:id="@+id/cat_breed_life_span"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                tools:text="Esperanza de vida"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="Esperanza de vida" />
 
             <TextView
                 android:id="@+id/cat_breed_temperament"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                tools:text="Atributo"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="Atributo" />
 
             <TextView
                 android:id="@+id/cat_breed_country"
@@ -61,10 +61,10 @@
                 android:drawablePadding="8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                app:drawableStartCompat="@drawable/location"
-                tools:text="Pais"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/location"
+                tools:text="Pais" />
 
 
         </LinearLayout>
@@ -73,7 +73,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_breed_img"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardCornerRadius="32dp"
@@ -83,7 +83,7 @@
 
         <ImageView
             android:id="@+id/cat_breed_img"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="200dp"
             android:contentDescription="Cat Image"
             android:scaleType="centerCrop"

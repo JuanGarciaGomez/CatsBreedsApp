@@ -1,15 +1,22 @@
 package com.juanfe.project.catsbreedsapplication.ui.landing
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.juanfe.project.catsbreedsapplication.R
 import com.juanfe.project.catsbreedsapplication.core.dialog.LoadingDialog
 import com.juanfe.project.catsbreedsapplication.databinding.FragmentLandingBinding
 import com.juanfe.project.catsbreedsapplication.ui.landing.adapter.CatBreedAdapter
@@ -41,9 +48,43 @@ class LandingFragment : Fragment() {
     }
 
     private fun initUi() {
+        initSearch()
         initObservers()
         initCallService()
         setUpRecyclerView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.top_app_bar, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    performSearch(it)
+                    val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                    imm?.hideSoftInputFromWindow(searchView.windowToken, 0)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+    private fun performSearch(query: String) {
+        landingViewModel.searchBreeds(query)
+    }
+
+    private fun initSearch() {
+        setHasOptionsMenu(true)
+        (activity as AppCompatActivity).setSupportActionBar(binding.topAppBar)
     }
 
     private fun initObservers() {

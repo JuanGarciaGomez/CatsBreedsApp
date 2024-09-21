@@ -11,5 +11,11 @@ interface BreedService {
         @Query("limit") limit: Int = 10,
         @Query("page") page: Int = 0,
     ): Response<List<BreedResponse>>
+    
+    @GET("breeds/search")
+    suspend fun searchBreed(
+        @Query("q") q: String = "a",
+        @Query("attach_image") attachImage: Int = 1,
+    ): Response<List<BreedResponse>>
 
 }
