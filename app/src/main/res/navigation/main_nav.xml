@@ -9,6 +9,20 @@
         android:id="@+id/landingFragment"
         android:name="com.juanfe.project.catsbreedsapplication.ui.landing.LandingFragment"
         android:label="fragment_landing"
-        tools:layout="@layout/fragment_landing" />
+        tools:layout="@layout/fragment_landing" >
+        <action
+            android:id="@+id/action_landingFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.juanfe.project.catsbreedsapplication.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="cat_breed_id"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

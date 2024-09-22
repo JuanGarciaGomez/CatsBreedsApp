@@ -27,3 +27,20 @@ fun View.pretty(url: String): RequestBuilder<Drawable> {
         .apply(RequestOptions().transform(CenterCropBlurTransformation(this.context, 25)))
         .sizeMultiplier(0.25f)
 }
+
+fun ImageView.loadCatBreadDetailImg(imgId: String) {
+    val url = "https://cdn2.thecatapi.com/images/$imgId.jpg"
+    prettyDetail(url)
+        .error(
+            prettyDetail(url.replace(".jpg", ".png"))
+        )
+        .into(this)
+}
+
+fun View.prettyDetail(url: String): RequestBuilder<Drawable> {
+    return Glide
+        .with(this)
+        .load(url)
+        .thumbnail(0.25f)
+        .placeholder(R.mipmap.ic_launcher_round)
+}

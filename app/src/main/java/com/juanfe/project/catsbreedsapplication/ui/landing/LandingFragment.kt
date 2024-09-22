@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.juanfe.project.catsbreedsapplication.R
 import com.juanfe.project.catsbreedsapplication.core.dialog.LoadingDialog
@@ -135,7 +136,7 @@ class LandingFragment : Fragment() {
         binding.catBreedRv.layoutManager = LinearLayoutManager(requireContext())
 
         catBreedAdapter = CatBreedAdapter(listOf()) {
-            //TODO NAVIGATION TO OTHER FRAGMENT
+            findNavController().navigate(LandingFragmentDirections.actionLandingFragmentToDetailFragment(it))
         }
         binding.catBreedRv.adapter = catBreedAdapter
         binding.catBreedRv.addOnScrollListener(landingViewModel.onScrollListener)
