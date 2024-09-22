@@ -84,4 +84,6 @@ dependencies {
 
     implementation (libs.logging.interceptor)
 
+    implementation (libs.glide.transformations)
+
 }
