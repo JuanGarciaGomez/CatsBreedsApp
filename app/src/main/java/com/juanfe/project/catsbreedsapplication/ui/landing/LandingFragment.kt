@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -50,7 +51,6 @@ class LandingFragment : Fragment() {
     private fun initUi() {
         initSearch()
         initObservers()
-        initCallService()
         setUpRecyclerView()
     }
 
@@ -64,7 +64,8 @@ class LandingFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
                     performSearch(it)
-                    val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                    val imm =
+                        context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                     imm?.hideSoftInputFromWindow(searchView.windowToken, 0)
                 }
                 return true
@@ -74,6 +75,18 @@ class LandingFragment : Fragment() {
                 return true
             }
         })
+
+        searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(p0: MenuItem): Boolean {
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(p0: MenuItem): Boolean {
+                landingViewModel.reLoadGetCatBreed()
+                return true
+            }
+        })
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -99,7 +112,10 @@ class LandingFragment : Fragment() {
 
     private fun updateUi(viewState: LandingViewState) {
         when (viewState) {
-            LandingViewState.Error -> LoadingDialog.dismiss()
+            LandingViewState.Error -> {
+                LoadingDialog.dismiss()
+                binding.fetchingContainer.visibility = View.GONE
+            }
 
             LandingViewState.Loading -> {
                 LoadingDialog.create(requireContext())
@@ -108,25 +124,21 @@ class LandingFragment : Fragment() {
 
             is LandingViewState.Success -> {
                 catBreedAdapter.updateList(viewState.breedModels)
+                binding.fetchingContainer.visibility =
+                    if (viewState.isFetching) View.VISIBLE else View.GONE
                 LoadingDialog.dismiss()
             }
         }
     }
 
-    private fun initCallService() {
-        landingViewModel.getCatBreedList()
-    }
-
     private fun setUpRecyclerView() {
-        val layoutManager = object : LinearLayoutManager(requireContext()) {
-            override fun canScrollVertically(): Boolean = true
-        }
-        binding.catBreedRv.layoutManager = layoutManager
+        binding.catBreedRv.layoutManager = LinearLayoutManager(requireContext())
 
         catBreedAdapter = CatBreedAdapter(listOf()) {
-
+            //TODO NAVIGATION TO OTHER FRAGMENT
         }
         binding.catBreedRv.adapter = catBreedAdapter
+        binding.catBreedRv.addOnScrollListener(landingViewModel.onScrollListener)
     }
 
 }

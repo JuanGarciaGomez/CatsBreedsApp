@@ -9,6 +9,6 @@ fun BreedResponse.toDomain() =
         name = name,
         origin = origin,
         temperament = temperament,
-        imageId = imageId,
+        imageId = imageId ?: "",
         lifeSpan = lifeSpan
     )

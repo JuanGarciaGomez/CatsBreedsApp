@@ -8,8 +8,8 @@ import javax.inject.Inject
 
 class CatBreedRepositoryImpl @Inject constructor(private val breedService: BreedService) :
     CatBreedRepository {
-    override suspend fun getCatBreed(): Result<List<BreedModel>> = runCatching {
-        val response = breedService.getCatBreedList()
+    override suspend fun getCatBreed(nextPageId: Int): Result<List<BreedModel>> = runCatching {
+        val response = breedService.getCatBreedList(page = nextPageId)
         val body = response.body()
         if (body.isNullOrEmpty()) {
             throw Exception("Null or empty")

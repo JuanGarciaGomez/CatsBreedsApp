@@ -5,6 +5,6 @@ import com.juanfe.project.catsbreedsapplication.domain.BreedModel
 sealed class LandingViewState() {
     data object Loading : LandingViewState()
     data object Error : LandingViewState()
-    data class Success(val breedModels: List<BreedModel>) : LandingViewState()
+    data class Success(val breedModels: List<BreedModel>, val isFetching: Boolean) : LandingViewState()
 
 }

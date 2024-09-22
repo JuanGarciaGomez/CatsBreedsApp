@@ -11,7 +11,7 @@ import com.juanfe.project.catsbreedsapplication.domain.BreedModel
 
 class CatBreedAdapter(
     private var list: List<BreedModel>,
-    private val onItemSelected: (BreedModel) -> Unit
+    private val onItemSelected: (String) -> Unit
 ) : RecyclerView.Adapter<CatBreedAdapter.MyViewHolder>() {
 
 
@@ -48,15 +48,16 @@ class CatBreedAdapter(
 
     class MyViewHolder(private val binding: ItemCatBreedBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: BreedModel, onItemSelected: (BreedModel) -> Unit) {
+        fun bind(item: BreedModel, onItemSelected: (String) -> Unit) {
             binding.apply {
+                val lifeSpan = "${item.lifeSpan} lifespan"
                 catBreedName.text = item.name
                 catBreedCountry.text = item.origin
-                catBreedLifeSpan.text = "${item.lifeSpan} lifespan"
+                catBreedLifeSpan.text = lifeSpan
                 catBreedImg.loadCatBreadImg(item.imageId)
                 catBreedTemperament.text = item.temperament.substringBefore(",")
                 cardBreedImg.setOnClickListener {
-                    onItemSelected.invoke(item)
+                    onItemSelected.invoke(item.id)
                 }
             }
         }

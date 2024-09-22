@@ -37,5 +37,27 @@
         app:layout_constraintVertical_chainStyle="spread_inside"
         tools:listitem="@layout/item_cat_breed" />
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/fetching_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:padding="8dp"
+            app:trackCornerRadius="4dp"
+            app:trackThickness="8dp"
+            tools:indeterminate="false"
+            tools:progress="50" />
+    </com.google.android.material.card.MaterialCardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
