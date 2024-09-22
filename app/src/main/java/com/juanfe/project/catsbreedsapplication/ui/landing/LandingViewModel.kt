@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.juanfe.project.catsbreedsapplication.data.repository.CatBreedRepository
+import com.juanfe.project.catsbreedsapplication.domain.GetAllCatBreedUseCase
+import com.juanfe.project.catsbreedsapplication.domain.SearchBreedUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,8 +15,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LandingViewModel @Inject constructor(private val mainRepository: CatBreedRepository) :
-    ViewModel() {
+class LandingViewModel @Inject constructor(
+    private val getAllCatBreedUseCase: GetAllCatBreedUseCase,
+    private val searchBreedUseCase: SearchBreedUseCase
+) : ViewModel() {
 
     private val _viewState = MutableStateFlow<LandingViewState>(LandingViewState.Loading)
     val viewState: StateFlow<LandingViewState> = _viewState
@@ -28,15 +31,13 @@ class LandingViewModel @Inject constructor(private val mainRepository: CatBreedR
 
     private fun getCatBreedList() {
         viewModelScope.launch(Dispatchers.IO) {
-            mainRepository.getCatBreed(nextPageId).fold(onSuccess = { catBreedList ->
+            getAllCatBreedUseCase(nextPageId).fold(onSuccess = { catBreedList ->
                 nextPageId++
                 val state = _viewState.value
                 val list = if (state is LandingViewState.Success) {
                     state.breedModels.plus(catBreedList)
                 } else {
                     catBreedList
-                }.filter {
-                    it.name !in listOf("Turkish Van", "Ragdoll", "Chartreux")
                 }
                 _viewState.value = LandingViewState.Success(list, false)
 
@@ -52,10 +53,8 @@ class LandingViewModel @Inject constructor(private val mainRepository: CatBreedR
         viewModelScope.launch(Dispatchers.IO) {
             _viewState.value = LandingViewState.Loading
             nextPageId = -1
-            mainRepository.searchBreed(query).fold(onSuccess = { searchResult ->
-                _viewState.value = LandingViewState.Success(searchResult.filter {
-                    it.name !in listOf("Turkish Van", "Ragdoll", "Chartreux")
-                }, false)
+            searchBreedUseCase(query).fold(onSuccess = { searchResult ->
+                _viewState.value = LandingViewState.Success(searchResult, false)
             }, onFailure = {
                 _viewState.value = LandingViewState.Error
                 it.printStackTrace()

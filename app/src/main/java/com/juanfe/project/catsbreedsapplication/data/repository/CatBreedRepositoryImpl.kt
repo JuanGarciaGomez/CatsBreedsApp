@@ -3,6 +3,7 @@ package com.juanfe.project.catsbreedsapplication.data.repository
 import com.juanfe.project.catsbreedsapplication.data.network.BreedService
 import com.juanfe.project.catsbreedsapplication.data.network.toDomain
 import com.juanfe.project.catsbreedsapplication.domain.BreedModel
+import com.juanfe.project.catsbreedsapplication.domain.CatBreedRepository
 import javax.inject.Inject
 
 

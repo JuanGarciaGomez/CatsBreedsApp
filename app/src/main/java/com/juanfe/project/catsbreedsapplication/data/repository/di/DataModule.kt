@@ -1,6 +1,6 @@
 package com.juanfe.project.catsbreedsapplication.data.repository.di
 
-import com.juanfe.project.catsbreedsapplication.data.repository.CatBreedRepository
+import com.juanfe.project.catsbreedsapplication.domain.CatBreedRepository
 import com.juanfe.project.catsbreedsapplication.data.repository.CatBreedRepositoryImpl
 import dagger.Binds
 import dagger.Module

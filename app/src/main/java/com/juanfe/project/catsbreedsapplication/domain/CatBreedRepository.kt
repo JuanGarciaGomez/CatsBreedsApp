@@ -1,4 +1,4 @@
-package com.juanfe.project.catsbreedsapplication.data.repository
+package com.juanfe.project.catsbreedsapplication.domain
 
 import com.juanfe.project.catsbreedsapplication.domain.BreedModel
 
