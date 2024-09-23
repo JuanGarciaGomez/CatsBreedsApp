@@ -85,7 +85,7 @@
             android:id="@+id/cat_breed_img"
             android:layout_width="150dp"
             android:layout_height="200dp"
-            android:contentDescription="Cat Image"
+            android:contentDescription="@string/cat_image"
             android:scaleType="centerCrop"
             tools:srcCompat="@drawable/logo" />
     </com.google.android.material.card.MaterialCardView>

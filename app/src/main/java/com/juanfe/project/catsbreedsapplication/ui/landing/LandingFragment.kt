@@ -2,6 +2,8 @@ package com.juanfe.project.catsbreedsapplication.ui.landing
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -11,14 +13,15 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.juanfe.project.catsbreedsapplication.R
-import com.juanfe.project.catsbreedsapplication.core.dialog.LoadingDialog
 import com.juanfe.project.catsbreedsapplication.databinding.FragmentLandingBinding
 import com.juanfe.project.catsbreedsapplication.ui.landing.adapter.CatBreedAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -113,20 +116,24 @@ class LandingFragment : Fragment() {
     private fun updateUi(viewState: LandingViewState) {
         when (viewState) {
             LandingViewState.Error -> {
-                LoadingDialog.dismiss()
+                hideLoading()
+                binding.errorSearch.visibility = View.VISIBLE
                 binding.fetchingContainer.visibility = View.GONE
             }
 
             LandingViewState.Loading -> {
-                LoadingDialog.create(requireContext())
+                binding.errorSearch.visibility = View.GONE
+                binding.viewContainerLoading.isVisible = true
+                binding.viewContainer.isVisible = false
                 catBreedAdapter.updateList(listOf())
             }
 
             is LandingViewState.Success -> {
+                binding.errorSearch.visibility = View.GONE
+                hideLoading()
                 catBreedAdapter.updateList(viewState.breedModels)
                 binding.fetchingContainer.visibility =
                     if (viewState.isFetching) View.VISIBLE else View.GONE
-                LoadingDialog.dismiss()
             }
         }
     }
@@ -135,10 +142,17 @@ class LandingFragment : Fragment() {
         binding.catBreedRv.layoutManager = LinearLayoutManager(requireContext())
 
         catBreedAdapter = CatBreedAdapter(listOf()) {
-            //TODO NAVIGATION TO OTHER FRAGMENT
+            findNavController().navigate(LandingFragmentDirections.actionLandingFragmentToDetailFragment(it))
+            landingViewModel.reLoadGetCatBreed()
+            hideLoading()
         }
         binding.catBreedRv.adapter = catBreedAdapter
         binding.catBreedRv.addOnScrollListener(landingViewModel.onScrollListener)
+    }
+
+    private fun hideLoading() {
+        binding.viewContainerLoading.isVisible = false
+        binding.viewContainer.isVisible = true
     }
 
 }

@@ -32,8 +32,17 @@ class LandingViewModel @Inject constructor(
     private fun getCatBreedList() {
         viewModelScope.launch(Dispatchers.IO) {
             getAllCatBreedUseCase(nextPageId).fold(onSuccess = { catBreedList ->
-                nextPageId++
                 val state = _viewState.value
+                if (catBreedList.isEmpty()) {
+                    nextPageId = -1
+                    if (state is LandingViewState.Success) {
+                        _viewState.value = state.copy(isFetching = false)
+                    } else {
+                        _viewState.value = LandingViewState.Error
+                    }
+                    return@fold
+                }
+                nextPageId++
                 val list = if (state is LandingViewState.Success) {
                     state.breedModels.plus(catBreedList)
                 } else {

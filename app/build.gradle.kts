@@ -3,7 +3,10 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+    id("androidx.navigation.safeargs.kotlin")
 }
+
+val apiKey: String = project.findProperty("api_key") as String? ?: "ive_99Qe4Ppj34NdplyLW67xCV7Ds0oSLKGgcWWYnSzMJY9C0QOu0HUR4azYxWkyW2nr"
 
 android {
     namespace = "com.juanfe.project.catsbreedsapplication"
@@ -15,8 +18,8 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
     }
 
     buildTypes {
@@ -38,6 +41,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
 }
@@ -82,8 +86,9 @@ dependencies {
     implementation(libs.glide)
     ksp(libs.compiler)
 
-    implementation (libs.logging.interceptor)
-
-    implementation (libs.glide.transformations)
+    implementation(libs.logging.interceptor)
+    implementation(libs.glide.transformations)
+    //Shimmer
+    implementation(libs.shimmer)
 
 }

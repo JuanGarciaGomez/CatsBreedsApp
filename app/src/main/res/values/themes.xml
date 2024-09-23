@@ -22,7 +22,14 @@
         # Required.
     </style>
 
+
+    <style name="IconButton" parent="Widget.Material3.Button.IconButton.Outlined">
+        <item name="iconTint">@color/md_theme_scrim</item>
+        <item name="strokeColor">@android:color/transparent</item>
+    </style>
+
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:fontFamily">@font/regular_font</item>
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>

@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Cat Breeds</string>
+    <string name="try_again">!Ups try again!</string>
+    <string name="attributes">Attributes</string>
+    <string name="description">Description</string>
+    <string name="country">Country</string>
+    <string name="lifespan">LifeSpan</string>
+    <string name="none">None</string>
+    <string name="cat_breed">Cat Breed</string>
+    <string name="cat_image">Cat Image</string>
+    <string name="strong">Strong</string>
+    <string name="search">Search</string>
 </resources>

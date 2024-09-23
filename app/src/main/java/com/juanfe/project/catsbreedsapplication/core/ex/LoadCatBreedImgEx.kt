@@ -23,7 +23,7 @@ fun View.pretty(url: String): RequestBuilder<Drawable> {
         .with(this)
         .load(url)
         .thumbnail(0.25f)
-        .placeholder(R.mipmap.ic_launcher_round)
         .apply(RequestOptions().transform(CenterCropBlurTransformation(this.context, 25)))
         .sizeMultiplier(0.25f)
+        .placeholder(R.mipmap.ic_launcher_round)
 }
