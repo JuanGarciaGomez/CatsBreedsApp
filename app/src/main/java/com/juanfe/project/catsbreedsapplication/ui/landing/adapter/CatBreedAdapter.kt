@@ -59,6 +59,9 @@ class CatBreedAdapter(
                 cardBreedImg.setOnClickListener {
                     onItemSelected.invoke(item.id)
                 }
+                cardBreedInfo.setOnClickListener {
+                    onItemSelected.invoke(item.id)
+                }
             }
         }
 
