@@ -15,7 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.juanfe.project.catsbreedsapplication.core.ex.loadCatBreadDetailImg
+import com.juanfe.project.catsbreedsapplication.core.ex.loadCatBreadImg
 import com.juanfe.project.catsbreedsapplication.databinding.FragmentDetailBinding
 import com.juanfe.project.catsbreedsapplication.domain.AttributesModel
 import com.juanfe.project.catsbreedsapplication.domain.BreedFullModel
@@ -69,7 +69,8 @@ class DetailFragment : Fragment() {
                 detailViewModel.viewState.collect {
                     when (it) {
                         DetailViewState.Error -> {
-                            hideLoading()
+                            binding.viewContainerLoading.isVisible = false
+                            binding.viewContainer.isVisible = false
                             binding.errorSearch.visibility = View.VISIBLE
                         }
 
@@ -97,7 +98,7 @@ class DetailFragment : Fragment() {
         setUpAttributesRv(breedFullModel)
         setUpTemperamentsRv(breedFullModel)
         with(binding) {
-            catBreedImg.loadCatBreadDetailImg(imgId = breedFullModel.imageId)
+            catBreedImg.loadCatBreadImg(imgId = breedFullModel.imageId)
             catBreedName.text = breedFullModel.name
             data1.text = breedFullModel.lifeSpan
             data2.text = breedFullModel.origin
@@ -136,11 +137,6 @@ class DetailFragment : Fragment() {
 
     private fun search() {
         detailViewModel.getCatBreedInformation(args.catBreedId)
-    }
-
-    private fun hideLoading() {
-        binding.viewContainerLoading.isVisible = false
-        binding.viewContainer.isVisible = true
     }
 
 }

@@ -151,7 +151,7 @@
                     app:layout_constraintTop_toBottomOf="@id/data1"
                     tools:text="LifeSpan" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/data2_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -159,6 +159,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/data1"
                     app:layout_constraintTop_toBottomOf="@id/data2"
+                    app:drawableStartCompat="@drawable/location"
                     tools:text="Country" />
 
 
