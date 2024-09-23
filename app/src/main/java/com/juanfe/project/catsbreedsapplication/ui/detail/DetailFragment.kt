@@ -1,10 +1,12 @@
 package com.juanfe.project.catsbreedsapplication.ui.detail
 
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -31,7 +33,6 @@ class DetailFragment : Fragment() {
     private val args: DetailFragmentArgs by navArgs()
 
     private val detailViewModel: DetailViewModel by viewModels()
-
 
     private lateinit var detailAttributesAdapter: DetailAttributesAdapter
     private lateinit var detailTemperamentAdapter: DetailTemperamentAdapter
@@ -67,13 +68,25 @@ class DetailFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 detailViewModel.viewState.collect {
                     when (it) {
-                        DetailViewState.Error -> {}
-                        DetailViewState.Loading -> {}
-                        is DetailViewState.Success -> {
-                            drawUi(it.breedModels)
+                        DetailViewState.Error -> {
+                            hideLoading()
+                            binding.errorSearch.visibility = View.VISIBLE
                         }
 
-                        null -> {}
+                        DetailViewState.Loading -> {
+                            binding.errorSearch.visibility = View.GONE
+                            binding.viewContainerLoading.isVisible = true
+                            binding.viewContainer.isVisible = false
+                        }
+
+                        is DetailViewState.Success -> {
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                binding.viewContainerLoading.isVisible = false
+                                binding.viewContainer.isVisible = true
+
+                            }, 250)
+                            drawUi(it.breedModels)
+                        }
                     }
                 }
             }
@@ -88,7 +101,7 @@ class DetailFragment : Fragment() {
             catBreedName.text = breedFullModel.name
             data1.text = breedFullModel.lifeSpan
             data2.text = breedFullModel.origin
-            catBreedId.text = breedFullModel.id
+            catBreedId.text = breedFullModel.id.replaceFirstChar { it.uppercaseChar() }
             description.text = breedFullModel.description
         }
     }
@@ -105,21 +118,19 @@ class DetailFragment : Fragment() {
     private fun setUpAttributesRv(breedFullModel: BreedFullModel) {
 
         val listAttributes = listOf(
-            AttributesModel("AL", breedFullModel.affectionLevel),
-            AttributesModel("AD", breedFullModel.adaptability),
-            AttributesModel("IN", breedFullModel.intelligence),
-            AttributesModel("EL", breedFullModel.energyLevel),
-            AttributesModel("SN", breedFullModel.socialNeeds),
-            AttributesModel("SF", breedFullModel.strangerFriendly),
-            AttributesModel("DF", breedFullModel.dogFriendly),
-            AttributesModel("CF", breedFullModel.childFriendly)
+            AttributesModel("AffectionLevel", breedFullModel.affectionLevel),
+            AttributesModel("Adaptability", breedFullModel.adaptability),
+            AttributesModel("Intelligence", breedFullModel.intelligence),
+            AttributesModel("EnergyLevel", breedFullModel.energyLevel),
+            AttributesModel("SocialNeeds", breedFullModel.socialNeeds),
+            AttributesModel("StrangerFriendly", breedFullModel.strangerFriendly),
+            AttributesModel("DogFriendly", breedFullModel.dogFriendly),
+            AttributesModel("ChildFriendly", breedFullModel.childFriendly)
         )
 
         binding.catBreedAttributesRv.layoutManager = LinearLayoutManager(requireContext())
 
-        detailAttributesAdapter = DetailAttributesAdapter(listAttributes) {
-            Log.e("NAVEGAR", "para atras")
-        }
+        detailAttributesAdapter = DetailAttributesAdapter(listAttributes)
         binding.catBreedAttributesRv.adapter = detailAttributesAdapter
     }
 
@@ -127,5 +138,9 @@ class DetailFragment : Fragment() {
         detailViewModel.getCatBreedInformation(args.catBreedId)
     }
 
+    private fun hideLoading() {
+        binding.viewContainerLoading.isVisible = false
+        binding.viewContainer.isVisible = true
+    }
 
 }

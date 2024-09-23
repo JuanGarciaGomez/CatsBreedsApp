@@ -15,8 +15,8 @@ class DetailViewModel @Inject constructor(
     private val getCatBreedInformationById: GetCatBreedInformationById,
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow<DetailViewState?>(null)
-    val viewState: StateFlow<DetailViewState?>
+    private val _viewState = MutableStateFlow<DetailViewState>(DetailViewState.Loading)
+    val viewState: StateFlow<DetailViewState>
         get() = _viewState
 
     fun getCatBreedInformation(catBreedId: String) {

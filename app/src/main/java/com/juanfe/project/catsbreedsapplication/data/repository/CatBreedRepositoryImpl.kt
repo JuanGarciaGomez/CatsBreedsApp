@@ -1,7 +1,6 @@
 package com.juanfe.project.catsbreedsapplication.data.repository
 
 import com.juanfe.project.catsbreedsapplication.data.network.BreedService
-import com.juanfe.project.catsbreedsapplication.data.network.response.BreedFullResponse
 import com.juanfe.project.catsbreedsapplication.data.network.toDomain
 import com.juanfe.project.catsbreedsapplication.domain.BreedFullModel
 import com.juanfe.project.catsbreedsapplication.domain.BreedModel
@@ -13,12 +12,8 @@ class CatBreedRepositoryImpl @Inject constructor(private val breedService: Breed
     CatBreedRepository {
     override suspend fun getCatBreed(nextPageId: Int): Result<List<BreedModel>> = runCatching {
         val response = breedService.getCatBreedList(page = nextPageId)
-        val body = response.body()
-        if (body.isNullOrEmpty()) {
-            throw Exception("Null or empty")
-        } else {
-            body.map { it.toDomain() }
-        }
+        val body = response.body() ?: throw Exception("Null or empty")
+        body.map { it.toDomain() }
     }
 
     override suspend fun searchBreed(query: String): Result<List<BreedModel>> = runCatching {
@@ -33,8 +28,8 @@ class CatBreedRepositoryImpl @Inject constructor(private val breedService: Breed
 
     override suspend fun getCatBreedInformationById(catId: String): Result<BreedFullModel> = runCatching {
         val response = breedService.getCatBreedInformationById(catId)
-        val body = response.body()
-        body?.toDomain() ?: throw Exception("Null or empty")
+        val body = response.body() ?: throw Exception("Null or empty")
+        body.toDomain()
     }
 
 }

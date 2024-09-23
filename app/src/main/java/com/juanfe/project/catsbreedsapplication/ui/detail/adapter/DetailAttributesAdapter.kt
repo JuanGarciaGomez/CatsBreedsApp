@@ -8,8 +8,7 @@ import com.juanfe.project.catsbreedsapplication.domain.AttributesModel
 
 
 class DetailAttributesAdapter(
-    private var list: List<AttributesModel>,
-    private val onBackSelected: (String) -> Unit
+    private var list: List<AttributesModel>
 ) : RecyclerView.Adapter<DetailAttributesAdapter.MyViewHolder>() {
 
     /**
@@ -32,12 +31,12 @@ class DetailAttributesAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = list[position]
-        holder.bind(item, onBackSelected)
+        holder.bind(item)
     }
 
     class MyViewHolder(private val binding: ItemCatBreedAttributeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: AttributesModel, onItemSelected: (String) -> Unit) {
+        fun bind(item: AttributesModel) {
             binding.apply {
                 progressIndicator.progress = item.value
                 attribute.text = item.name

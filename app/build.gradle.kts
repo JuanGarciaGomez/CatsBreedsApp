@@ -84,7 +84,8 @@ dependencies {
     ksp(libs.compiler)
 
     implementation (libs.logging.interceptor)
-
     implementation (libs.glide.transformations)
+    //Shimmer
+    implementation (libs.shimmer)
 
 }
