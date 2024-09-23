@@ -1,5 +1,6 @@
 package com.juanfe.project.catsbreedsapplication.data.network.di
 
+import com.juanfe.project.catsbreedsapplication.BuildConfig
 import com.juanfe.project.catsbreedsapplication.data.network.ApiKeyInterceptor
 import com.juanfe.project.catsbreedsapplication.data.network.BreedService
 import com.juanfe.project.catsbreedsapplication.data.network.utils.NetworkConstants
@@ -21,7 +22,7 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(ApiKeyInterceptor("ive_99Qe4Ppj34NdplyLW67xCV7Ds0oSLKGgcWWYnSzMJY9C0QOu0HUR4azYxWkyW2nr"))
+            .addInterceptor(ApiKeyInterceptor(BuildConfig.API_KEY))
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.HEADERS
             })
