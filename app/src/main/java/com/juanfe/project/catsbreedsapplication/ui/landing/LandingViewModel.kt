@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.juanfe.project.catsbreedsapplication.domain.BreedModel
 import com.juanfe.project.catsbreedsapplication.domain.GetAllCatBreedUseCase
 import com.juanfe.project.catsbreedsapplication.domain.SearchBreedUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,32 +32,50 @@ class LandingViewModel @Inject constructor(
 
     private fun getCatBreedList() {
         viewModelScope.launch(Dispatchers.IO) {
-            getAllCatBreedUseCase(nextPageId).fold(onSuccess = { catBreedList ->
-                val state = _viewState.value
-                if (catBreedList.isEmpty()) {
-                    nextPageId = -1
-                    if (state is LandingViewState.Success) {
-                        _viewState.value = state.copy(isFetching = false)
-                    } else {
-                        _viewState.value = LandingViewState.Error
-                    }
-                    return@fold
-                }
-                nextPageId++
-                val list = if (state is LandingViewState.Success) {
-                    state.breedModels.plus(catBreedList)
-                } else {
-                    catBreedList
-                }
-                _viewState.value = LandingViewState.Success(list, false)
-
+            val result = getAllCatBreedUseCase(nextPageId)
+            result.fold(onSuccess = { catBreedList ->
+                handleSuccess(catBreedList)
             }, onFailure = {
-                it.printStackTrace()
-                _viewState.value = LandingViewState.Error
-                nextPageId = -1
+                handleError(it)
             })
         }
     }
+
+    private fun handleSuccess(catBreedList: List<BreedModel>) {
+        val currentState = _viewState.value
+
+        if (catBreedList.isEmpty()) {
+            endPagination(currentState)
+        } else {
+            nextPageId++
+            updateBreedList(catBreedList, currentState)
+        }
+    }
+
+    private fun endPagination(currentState: LandingViewState) {
+        nextPageId = -1
+        _viewState.value = if (currentState is LandingViewState.Success) {
+            currentState.copy(isFetching = false)
+        } else {
+            LandingViewState.Error
+        }
+    }
+
+    private fun updateBreedList(catBreedList: List<BreedModel>, currentState: LandingViewState) {
+        val updatedList = if (currentState is LandingViewState.Success) {
+            currentState.breedModels + catBreedList
+        } else {
+            catBreedList
+        }
+        _viewState.value = LandingViewState.Success(updatedList, isFetching = false)
+    }
+
+    private fun handleError(throwable: Throwable) {
+        throwable.printStackTrace()
+        _viewState.value = LandingViewState.Error
+        nextPageId = -1
+    }
+
 
     fun searchBreeds(query: String) {
         viewModelScope.launch(Dispatchers.IO) {

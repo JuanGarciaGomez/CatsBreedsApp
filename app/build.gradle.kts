@@ -53,9 +53,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 
     //Splash
     implementation(libs.androidx.core.splashscreen)
@@ -90,5 +87,15 @@ dependencies {
     implementation(libs.glide.transformations)
     //Shimmer
     implementation(libs.shimmer)
+
+    //Test
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.coroutines.test)
+    testImplementation ("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("app.cash.turbine:turbine:0.8.0")
 
 }

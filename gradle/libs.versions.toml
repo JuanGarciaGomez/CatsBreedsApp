@@ -23,6 +23,10 @@ fragmentKtx = "1.8.3"
 coreSplashscreen = "1.0.1"
 navigationFragmentKtx = "2.8.1"
 shimmer = "0.5.0"
+mockito = "5.12.0"
+mockito-kotlin = "5.3.1"
+coroutines = "1.8.1"
+
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
@@ -51,6 +55,10 @@ androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx",
 safe-args = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationFragmentKtx" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+mockito-kotlin  = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
