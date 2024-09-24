@@ -1,9 +1,11 @@
 package com.juanfe.project.catsbreedsapplication.ui.landing
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import app.cash.turbine.test
 import com.juanfe.project.catsbreedsapplication.domain.BreedModel
 import com.juanfe.project.catsbreedsapplication.domain.GetAllCatBreedUseCase
 import com.juanfe.project.catsbreedsapplication.domain.SearchBreedUseCase
+import com.juanfe.project.catsbreedsapplication.ui.detail.DetailViewState
 import junit.framework.TestCase.assertNotNull
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -13,6 +15,7 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -79,7 +82,7 @@ class LandingViewModelTest {
         advanceUntilIdle()
 
         val state = viewModel.viewState.value
-        assertNotNull(state)
+        assert(state is LandingViewState.Success)
     }
 
     @Test
@@ -96,7 +99,8 @@ class LandingViewModelTest {
         advanceUntilIdle()
 
         val state = viewModel.viewState.value
-        assertNotNull(state)
+        assert(state is LandingViewState.Success)
+
     }
 
 
