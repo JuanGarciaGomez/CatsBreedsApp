@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="24dp"
+    android:padding="16dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="130dp"
+        android:backgroundTint="@color/gray"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="4dp"
+        app:strokeColor="@android:color/transparent"
+        app:strokeWidth="0dp"
+        tools:ignore="RtlSymmetry">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="24dp"
+            android:paddingStart="36dp"
+            android:paddingEnd="16dp">
+
+            <RelativeLayout
+                android:id="@+id/cat_breed_name_ld"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_margin="4dp"
+                android:background="@color/gray"
+                android:translationZ="100dp" />
+
+            <RelativeLayout
+                android:id="@+id/cat_breed_life_span"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_margin="4dp"
+                android:background="@color/gray"
+                android:translationZ="100dp" />
+
+            <RelativeLayout
+                android:id="@+id/cat_breed_temperament"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_margin="4dp"
+                android:background="@color/gray"
+                android:translationZ="100dp" />
+
+            <RelativeLayout
+                android:id="@+id/cat_breed_country"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_margin="4dp"
+                android:background="@color/gray"
+                android:translationZ="100dp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_breed_img"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/gray"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="4dp"
+        app:strokeColor="@android:color/transparent"
+        app:strokeWidth="0dp">
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

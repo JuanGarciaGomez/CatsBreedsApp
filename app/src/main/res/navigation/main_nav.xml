@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav.xml"
+    app:startDestination="@id/landingFragment">
+
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="com.juanfe.project.catsbreedsapplication.ui.landing.LandingFragment"
+        android:label="fragment_landing"
+        tools:layout="@layout/fragment_landing" >
+        <action
+            android:id="@+id/action_landingFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/right_enter_anim"
+            app:exitAnim="@anim/right_exit_anim"
+            app:popEnterAnim="@anim/right_pop_enter_anim"
+            app:popExitAnim="@anim/right_pop_exit_anim"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.juanfe.project.catsbreedsapplication.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="cat_breed_id"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

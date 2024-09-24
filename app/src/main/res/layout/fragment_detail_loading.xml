@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    tools:context=".ui.detail.DetailFragment">
+
+    <Button
+        android:id="@+id/ic_back_ld"
+        style="@style/IconButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/gray"
+        android:translationZ="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/app_name_ld"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/gray"
+        android:translationZ="100dp"
+        app:layout_constraintStart_toEndOf="@id/ic_back_ld"
+        app:layout_constraintTop_toTopOf="@id/ic_back_ld" />
+
+    <RelativeLayout
+        android:id="@+id/cat_breed_id_ld"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/gray"
+        android:translationZ="100dp"
+        app:layout_constraintEnd_toEndOf="@id/header_ld"
+        app:layout_constraintTop_toTopOf="@id/header_ld" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/header_ld"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:backgroundTint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@android:color/transparent">
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <RelativeLayout
+        android:id="@+id/cat_breed_name_ld"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="36dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_ld" />
+
+
+    <LinearLayout
+        android:id="@+id/chips_ld"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cat_breed_name_ld">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_ld_1"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_ld_2"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_ld_3"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_ld_4"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/data1_ld"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toStartOf="@id/data2_ld"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chips_ld" />
+
+    <RelativeLayout
+        android:id="@+id/data2_ld"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/data1_ld"
+        app:layout_constraintTop_toBottomOf="@id/chips_ld" />
+
+    <RelativeLayout
+        android:id="@+id/data1_title_ld"
+        android:layout_width="80dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toStartOf="@id/data2_ld"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/data1_ld" />
+
+    <RelativeLayout
+        android:id="@+id/data2_title_ld"
+        android:layout_width="80dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/data1_ld"
+        app:layout_constraintTop_toBottomOf="@id/data2_ld" />
+
+    <RelativeLayout
+        android:id="@+id/description_ld"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/data1_ld"
+        app:layout_constraintTop_toBottomOf="@id/data2_title_ld" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
